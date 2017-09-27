@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>wedding</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<meta name="csrf-token" content="HOB2YFPGz2QyVJ1AagtnwlNw72UyjgcNbXFnawAx">
+
+		<!-- Link Swiper's CSS -->
+		<link rel="stylesheet" href="css/swiper.css">
+		<link rel="stylesheet" href="css/component.css">
+		<link rel="stylesheet" href="css/barrager.css">
+		<link rel="stylesheet" href="css/base.css">
+		<style type="text/css">
+			.close{
+				width: 40px;
+				height: 40px;
+				position: absolute;
+				right: 60px;
+			    top: 2%;
+			    z-index: 200;
+				background: url(img/on.png)no-repeat;
+				background-size: cover;
+			}
+           #startDm .swiper-wrapper .swiper-slide img{
+				border-radius: 7%;
+			}
+			#startDm .swiper-wrapper .swiper-slide {
+				border-radius: 15%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="wedding container">
+			
+			<div>
+				<div class="wedding-editor">
+					<p class="code" style="margin-top: -20px;">Last login: <span></span></p>
+					<!-- Swiper -->
+					<div id="startDm" class="swiper-container">
+						<div  class="swiper-wrapper">
+							<div class="swiper-slide"><img data-src="img/8.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/14.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/15.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/8.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/5.jpg" class="swiper-lazy"></div>
+                            <div class="swiper-slide"><img data-src="img/016.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/6.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/3.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/2.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/9.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/13.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/038.jpg" class="swiper-lazy"></div>
+							<div class="swiper-slide"><img data-src="img/091.jpg" class="swiper-lazy"></div>
+                            <div class="swiper-slide"><img data-src="img/036.jpg" class="swiper-lazy"></div>
+							
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+					</div>
+
+				</div>
+				<div class="close clear"></div>
+				<div id="danmu" class="danmu"><img src="img/stop.png" style="height: 50px"></div>
+				<div>
+					<section class="content bgcolor-1 kuro " style="display: none;">
+						<span class="input input--haruki">
+                <input class="input__field input__field--haruki" type="text" id="input-2">
+                <label class="input__label input__label--haruki" for="input-2">
+                    <span class="input__label-content input__label-content--haruki">你想说点什么</span>
+						</label>
+						</span>
+					</section>
+				</div>
+			</div>
+
+			<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+			<!-- Swiper JS -->
+			<script src="js/swiper.js"></script>
+			<script src="js/jquery.barrager.js"></script>
+			<script>
+				$(function() {
+					$(document).keypress(function(e) {
+						// 回车键事件  
+						if(e.which == 13) {
+							$('.send').click();
+						}
+					});
+					var now_date = (new Date()).toDateString();
+					$('p.code span').text(now_date);
+
+					var item = {
+						info: '', //文字 
+						href:'javascript:void(0)',
+						close: false, //显示关闭按钮 
+						speed: 10, //延迟,单位秒,默认6 
+						color: '#fff', //颜色,默认白色 
+						old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+					}
+					$(document).on('click', '.danmu', function() {
+						$('.kuro').slideToggle('slow');
+						$('.danmu').attr('class', 'send');
+					});
+					$(document).on('click', '.send', function() {
+						$('.kuro').slideToggle('slow');
+						$('.send').attr('class', 'danmu');
+						var content = $('input.input__field').val();
+						if(content == '') {
+							return false;
+						}
+						item.info = content;
+						$('body').barrager(item);
+						$('input').val('');
+						send_to_server(item);
+						
+					});
+					
+				})
+
+				function send_barrager(item) {
+					$('body').barrager(item);
+				}
+				function send_to_server(item) {
+//					var time = (new Date()).toDateString();
+					var data = {
+						con: item.info
+					};
+					$.post("http://120.24.16.96/nie/add.php", 
+						data,
+						function(data,status) {
+							 console.log("数据：" + data + "\n状态：" + status);
+					});
+				}
+				var looper;
+				$('#startDm').one('touchmove',function(){
+					getMess();
+				})
+				///
+				function getMess(){
+					$.post("http://120.24.16.96/nie/sel.php",
+				    {},
+				    function(data,status){
+//				      console.log("数据：" + data + "\n状态：" + status);
+				      var len = eval(data).length;
+				      var dataArr = [];
+				      for(var i=0;i<len;i++){
+				      	dataArr[i] = {
+					               info:'', //文字 
+					               href:'javascript:void(0)',
+					               close:false, //显示关闭按钮 
+					               speed:12, //延迟,单位秒,默认6 
+					               color:'#fff', //颜色,默认白色 
+					               old_ie_color:'#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+				             	};
+				      	dataArr[i].info = eval(data)[i].contents
+				      }
+				      	//每条弹幕发送间隔
+						/*var looper_time= (Math.random()*1.8)*1000;*/
+                        var looper_time= 1000;
+						//弹幕总数 len
+						
+						//是否首次执行
+						var run_once=true;
+						//弹幕索引
+						var index=0;
+						//先执行一次
+				      	barrager();
+						function  barrager(){
+						 
+						  if(run_once){
+						      //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+						      looper=setInterval(barrager,looper_time);                
+						      run_once=false;
+						  }else{
+							  //发布一个弹幕
+							  $('body').barrager(dataArr[index]);
+							  
+							  //索引自增
+							  index ++;
+							  //所有弹幕发布完毕，清除计时器。
+							  if(index == len){
+							  	index=0;
+	//						      clearInterval(looper);
+	//						      return false;
+							  }
+							}
+					    }  	
+				    });
+				}
+				//清除弹幕
+				var n = 0;
+				$('.clear').on('click',function(){
+					
+					if(n%2==0){
+						$.fn.barrager.removeAll();
+						clearInterval(looper);
+					}else{
+						getMess();
+					}
+					n++;
+					console.log($.fn.barrager)
+				})
+				//开启弹幕
+ 				
+			</script>
+			<!-- Initialize Swiper -->
+			<script>
+				var swiper = new Swiper('.swiper-container', {
+					pagination: '.swiper-pagination',
+					paginationClickable: true,
+					centeredSlides: true,
+					slidesPerView: 'auto',
+					effect: 'cube',
+                    loop:true,
+                    autoplay:2800,
+                    speed:1000,
+                    autoplayDisableOnInteraction:false,
+					lazyLoading: true,
+					lazyLoadingInPrevNext: true,
+					lazyLoadingInPrevNextAmount: 4,
+				});
+			</script>
+
+			<script src="js/classie.js"></script>
+			<script>
+				(function() {
+					if(!String.prototype.trim) {
+						(function() {
+							// Make sure we trim BOM and NBSP
+							var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+							String.prototype.trim = function() {
+								return this.replace(rtrim, '');
+							};
+						})();
+					}
+
+					[].slice.call(document.querySelectorAll('input.input__field')).forEach(function(inputEl) {
+						// in case the input is already filled..
+						if(inputEl.value.trim() !== '') {
+							classie.add(inputEl.parentNode, 'input--filled');
+						}
+
+						// events:
+						// inputEl.addEventListener( 'focus', onInputFocus );
+						inputEl.addEventListener('blur', onInputBlur);
+					});
+
+					function onInputBlur(ev) {
+						if(ev.target.value.trim() === '') {
+							classie.remove(ev.target.parentNode, 'input--filled');
+						}
+					}
+				})();
+			</script>
+	</body>
+
+</html>

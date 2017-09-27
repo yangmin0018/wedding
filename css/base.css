@@ -1,0 +1,154 @@
+html,
+body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    background: #2B2B48;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 96%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+img {
+    width: auto;
+    max-width: 100%;
+}
+
+#danmu {
+    position: absolute;
+    right: 10px;
+    bottom: 5%;
+    z-index: 200;
+}
+
+.kuro {
+    position: absolute;
+    bottom: 5%;
+    z-index: 2;
+}
+
+body,
+html {
+    height: 100%
+}
+
+.container {
+    width: 100%!important
+}
+
+.wedding {
+    max-width: 568px!important;
+    min-height: 100%;
+}
+
+.wedding,
+.wedding .wedding-header {
+    position: relative;
+}
+
+.wedding .wedding-header {
+    z-index: 3;
+    padding: 12px;
+    overflow: hidden
+}
+
+.wedding .wedding-header>a {
+    float: left;
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    border-radius: 8px;
+    background: #fc615d
+}
+
+.wedding .wedding-header>a.minimum {
+    background: #fdbc40
+}
+
+.wedding .wedding-header>a.maximum {
+    background: #34c84a
+}
+
+.wedding .wedding-editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    padding-top: 40px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transition: all 1.6s cubic-bezier(.4, 0, 1, 1);
+    -webkit-transition: all 1.6s cubic-bezier(.4, 0, 1, 1)
+}
+
+.wedding .wedding-editor pre {
+    margin: 0;
+    margin-top: -25px;
+    white-space: pre-wrap
+}
+
+.wedding .wedding-editor pre code {
+    white-space: pre-wrap;
+    word-break: break-all;
+    background: transparent
+}
+
+.wedding .wedding-editor p.code,
+.wedding .wedding-editor pre code {
+    font-size: 16px!important;
+    margin: 0;
+    color: #bbb;
+    line-height: 1.2;
+    font-family: Roboto Mono, Menlo, Monaco, Courier, monospace!important;
+    font-weight: 500!important
+}
+
+.wedding .wedding-editor p.code .addon {
+    color: #68fcfb
+}
+
+.wedding .wedding-editor p.code .time {
+    color: #666
+}
+
+.wedding .wedding-editor p.code .task {
+    color: #009ab2
+}
+
+.wedding .wedding-editor p.code .duration {
+    color: #bf36b7
+}
